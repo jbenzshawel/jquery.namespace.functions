@@ -146,6 +146,8 @@ $.fn.customNamespace = function (callbackName, params) {
     $(arrayList).each(function(i, listItem) {
       listHtml.push("<option value=\""+ listItem.value + "\">" + listItem.display + "</option>");
     });
+    // clear html of select input 
+    jquery.html("");
     // bind html to $(this) of jquery function call 
     jquery.append("<option value=\"-1\">Any</option>");        
     jquery.append(listHtml.join(""));
@@ -179,10 +181,9 @@ $.fn.customNamespace = function (callbackName, params) {
 }; // end $.fn.customNamespace 
 
 $(function() {
-  // create dom element
+  // create dom elements for examples
   $("body").append("<select id=\"testList\"></select>");
   $("body").append("<select id=\"testList2\"></select>");
-  
 
   // example use of setListOptions 
   $("#testList").customNamespace("setListOptions", [
@@ -196,10 +197,10 @@ $(function() {
     [ { display: "B word test", value: 2 },
       { display: "Test 1", value: 1.75 }, 
       { display: "Another Test 2", value: 1.50}
-    ], "display", "string"
+    ], "display", "string" // sort by display property alphabeticale
   ]);
   // example use of addError
-  $("#testList").customNamespace("addError", [ "Please select an option." ]); 
+  $("#testList").customNamespace("addError", [ "Please select an option." ]); // note still use array for one param 
   // example error logging for invalid parameters
   $("#testList").customNamespace("addError");
   $("#testList").customNamespace("unknownCallback");

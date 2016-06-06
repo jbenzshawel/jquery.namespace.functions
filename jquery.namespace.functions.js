@@ -1,7 +1,7 @@
 "use strict";
 
-$.fn.customNamespace = function (callbackName, params) {
-  const NAMESPACE = "customNamespace"; 
+$.fn.yourNamespace = function (callbackName, params) {
+  const NAMESPACE = "yourNamespace"; 
   // logger object to handle errors 
   var logger = {};
   logger.missingCallback = function() {
@@ -46,9 +46,9 @@ $.fn.customNamespace = function (callbackName, params) {
   params.push($(this));
   // callbacks object for callback functions
   var callbacks = {};
-  
   /////////////////////////////////////////////////////////
-  // ADD CALLBACK FUNCTIONS HERE
+  // ADD CALLBACK FUNCTIONS HERE 
+  
   
   // call callback function and log errors 
   if (callbacks.hasOwnProperty(callbackName)) {
