@@ -33,11 +33,11 @@ $.fn.customNamespace = function (callbackName, params) {
   	logger.jqueryNotFound();
     isValid = false;
   }
-  // return early if parameters invalid
+  // return early if base parameters invalid
   if (!isValid) {
   	return;
   }
-  
+  // initialize params if empty (some functions could not have parameters)
   if (params === undefined)
     params = [];
   // add "this" scope to params so callback functions can manipulate 
@@ -70,7 +70,7 @@ $.fn.customNamespace = function (callbackName, params) {
       sortOn = false; 
     if (sortType === undefined)
       sortType = false;
-    // sort arrayList according to alphabetical display or valuesType 
+    // sort arrayList according to display / value or sort type  
     if (typeof(sortOn) === "string" && sortOn != false) {
       if (sortOn === "display" && sortType === "string") { 
       arrayList.sort(function(a, b) {
@@ -96,7 +96,6 @@ $.fn.customNamespace = function (callbackName, params) {
             if (isNaN(nameA) || isNaN(nameB)) {
               return 0; 
             }
-
             if (nameA < nameB) {
               return -1;
             }
@@ -175,14 +174,22 @@ $.fn.customNamespace = function (callbackName, params) {
       logger.callbackNotFound(callbackName);
   }
   return;
-};
+}; // end $.fn.customNamespace 
 
-// example use of setListOptions; 
+// example use of setListOptions 
 $("#testList").customNamespace("setListOptions", [
   [ { display: "B word test", value: 2 },
     { display: "Test 1", value: 1.75 }, 
     { display: "Another Test 2", value: 1.50}
-  ], "display", "string"]);
+  ]
+]);
+// example overload of setListOptions
+$("#testList").customNamespace("setListOptions", [
+  [ { display: "B word test", value: 2 },
+    { display: "Test 1", value: 1.75 }, 
+    { display: "Another Test 2", value: 1.50}
+  ], "display", "string"
+]);
 // example use of addError
 $("#testList").customNamespace("addError", [ "Please select an option." ]); 
 // example error logging for invalid parameters
