@@ -46,19 +46,9 @@ $.fn.customNamespace = function (callbackName, params) {
   params.push($(this));
   // callbacks object for callback functions
   var callbacks = {};
-  // example callback function 
-  // callbacks.yourFunction = function (params) {
-  // 	if (params.length != 2) {
-  //   	return { msg : "invalid params", numParams : 1 }; // second param is default and always set 
-  //  }
-  //  var yourParam = params[0];
-  //  var jquery = params[1];
-  //  // do something with params 
-  //  // example jquery html function call on $(this)
-  //  jquery.html("<div>" + yourParam + "</div>")
-  //  return { msg : "OK" };
-  //   }
-  //  }
+  
+  /////////////////////////////////////////////////////////
+  // ADD CALLBACK FUNCTIONS HERE
   
   // call callback function and log errors 
   if (callbacks.hasOwnProperty(callbackName)) {
