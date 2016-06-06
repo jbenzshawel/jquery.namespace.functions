@@ -5,6 +5,7 @@ Allows calling custom jquery functions (`$.fn.yourFunction`) without interferrin
 
 Add callback functions like so:
 ```javascript
+  // example callback function 
   callbacks.yourFunction = function (params) {
   	if (params.length != 2) {
     	return { msg : "invalid params", numParams : 1 }; // second param is default and always set 
