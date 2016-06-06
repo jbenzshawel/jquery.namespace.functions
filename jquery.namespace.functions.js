@@ -59,4 +59,4 @@ $.fn.yourNamespace = function (callbackName, params) {
       logger.callbackNotFound(callbackName);
   }
   return;
-}; // end $.fn.customNamespace 
+}; // end $.fn.yourNamespace 
