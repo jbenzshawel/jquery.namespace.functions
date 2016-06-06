@@ -24,14 +24,20 @@ $.fn.customNamespace = function (callbackName, params) {
   };
 
   // validate parameters 
+  var isValid = true;
   if (callbackName === undefined) {
     logger.missingCallback(); 
-    return; 
+    isValid = false;
   }
   if ($(this).length === 0) {
   	logger.jqueryNotFound();
-    return;
+    isValid = false;
   }
+  // return early if parameters invalid
+  if (!isValid) {
+  	return;
+  }
+  
   if (params === undefined)
     params = [];
   // add "this" scope to params so callback functions can manipulate 
@@ -182,4 +188,4 @@ $("#testList").customNamespace("addError", [ "Please select an option." ]);
 // example error logging for invalid parameters
 $("#testList").customNamespace("addError");
 $("#testList").customNamespace("unknownCallback");
-$(".invalidSelector").customNamespace("addError", ["Please select an option."]);
+$(".invalidSelector").customNamespace();
