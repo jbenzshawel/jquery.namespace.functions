@@ -19,7 +19,7 @@ $.fn.customNamespace = function (callbackName, params) {
     return;
   };
   logger.jqueryNotFound = function() {
-  	console.log("%cError: jquery parameter in $(this).fn not found", "color:red");
+    console.log("%cError: jquery parameter in $(this).fn not found", "color:red");
     return;
   };
 
@@ -30,25 +30,25 @@ $.fn.customNamespace = function (callbackName, params) {
     isValid = false;
   }
   if ($(this).length === 0) {
-  	logger.jqueryNotFound();
+    logger.jqueryNotFound();
     isValid = false;
   }
   // return early if base parameters invalid
   if (!isValid) {
   	return;
   }
-  // initialize params if empty (some functions could not have parameters)
+  // initialize params if empty (some functions may not have parameters)
   if (params === undefined)
     params = [];
   // add "this" scope to params so callback functions can manipulate 
   // "this" of parent function 
   params.push($(this));
-  // object to store callback functions
+  // callbacks object for callback functions
   var callbacks = {};
   // @params[0] = array of objects { display : "" : value: ""} for Select List 
   // @params[1] = string of "display" or "value" to sort on (optional)
-  // @params[2] = string type to sort on (string for display. integer, float, or string
-  //              for values) (optional)
+  // @params[2] = string type to sort on (string for display. string, float, or 
+  //              integer for values) (optional)
   // @return status object of DOM manipulatin 
   callbacks.setListOptions = function(params) {
     if (params.length  < 2) {
@@ -143,7 +143,7 @@ $.fn.customNamespace = function (callbackName, params) {
     // build out html for select list input   
     var listHtml = [];
     $(arrayList).each(function(i, listItem) {
-      listHtml.push('<option value="' + listItem.value + '">' + listItem.display + "</option>");
+      listHtml.push("<option value=\""+ listItem.value + "\">" + listItem.display + "</option>");
     });
     // bind html to $(this) of jquery function call 
     jquery.html(listHtml.join(""));
