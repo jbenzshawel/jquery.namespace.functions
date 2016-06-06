@@ -1,5 +1,8 @@
 "use strict";
 
+// create dom element
+$("body").append("<select id=\"testList\"></select>");
+
 $.fn.customNamespace = function (callbackName, params) {
   // logger object to handle errors 
   var logger = {};
@@ -176,23 +179,25 @@ $.fn.customNamespace = function (callbackName, params) {
   return;
 }; // end $.fn.customNamespace 
 
-// example use of setListOptions 
-$("#testList").customNamespace("setListOptions", [
-  [ { display: "B word test", value: 2 },
-    { display: "Test 1", value: 1.75 }, 
-    { display: "Another Test 2", value: 1.50}
-  ]
-]);
-// example overload of setListOptions
-$("#testList").customNamespace("setListOptions", [
-  [ { display: "B word test", value: 2 },
-    { display: "Test 1", value: 1.75 }, 
-    { display: "Another Test 2", value: 1.50}
-  ], "display", "string"
-]);
-// example use of addError
-$("#testList").customNamespace("addError", [ "Please select an option." ]); 
-// example error logging for invalid parameters
-$("#testList").customNamespace("addError");
-$("#testList").customNamespace("unknownCallback");
-$(".invalidSelector").customNamespace();
+$(function() {
+	// example use of setListOptions 
+  $("#testList").customNamespace("setListOptions", [
+    [ { display: "B word test", value: 2 },
+      { display: "Test 1", value: 1.75 }, 
+      { display: "Another Test 2", value: 1.50}
+    ]
+  ]);
+  // example overload of setListOptions
+  $("#testList").customNamespace("setListOptions", [
+    [ { display: "B word test", value: 2 },
+      { display: "Test 1", value: 1.75 }, 
+      { display: "Another Test 2", value: 1.50}
+    ], "display", "string"
+  ]);
+  // example use of addError
+  $("#testList").customNamespace("addError", [ "Please select an option." ]); 
+  // example error logging for invalid parameters
+  $("#testList").customNamespace("addError");
+  $("#testList").customNamespace("unknownCallback");
+  $(".invalidSelector").customNamespace();
+});
