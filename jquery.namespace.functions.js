@@ -4,18 +4,22 @@ $.fn.customNamespace = function (callbackName, params) {
   // logger object to handle errors 
   var logger = {};
   logger.missingCallback = function() {
-    console.log("Error: parameter callbackName cannot be empty");
+    console.log("%cError: parameter callbackName cannot be empty", "color:red");
     return; 
   };
   logger.callbackNotFound = function(callbackName) {
-    console.log("Error: callback function " + callbackName + " not found");
+    console.log("%cError: callback function " + callbackName + " not found", "color:red");
     return;
   };
   logger.invalidParams = function(callbackName, numParams) {
     var msg = "Error: " + callbackName + " function requires at least " + numParams + " parameter";
     if (numParams > 1) 
       msg += "s";
-    console.log(msg);
+    console.log("%c" + msg, "color:red");
+    return;
+  };
+  logger.jqueryNotFound = function() {
+  	console.log("%cError: jquery parameter in $(this).fn not found", "color:red");
     return;
   };
 
@@ -24,13 +28,15 @@ $.fn.customNamespace = function (callbackName, params) {
     logger.missingCallback(); 
     return; 
   }
+  if ($(this).length === 0) {
+  	logger.jqueryNotFound();
+    return;
+  }
   if (params === undefined)
     params = [];
- 
   // add "this" scope to params so callback functions can manipulate 
   // "this" of parent function 
   params.push($(this));
-
   // object to store callback functions
   var callbacks = {};
   // @params[0] = array of objects { display : "" : value: ""} for Select List 
@@ -58,7 +64,6 @@ $.fn.customNamespace = function (callbackName, params) {
       sortOn = false; 
     if (sortType === undefined)
       sortType = false;
-    
     // sort arrayList according to alphabetical display or valuesType 
     if (typeof(sortOn) === "string" && sortOn != false) {
       if (sortOn === "display" && sortType === "string") { 
@@ -113,7 +118,7 @@ $.fn.customNamespace = function (callbackName, params) {
         break;
       case "string": 
           arrayList.sort(function(a, b) {
-          // set two items to compare case insensitive 
+            // set two items to compare case insensitive 
             var nameA = a.display.toUpperCase(); 
             var nameB = b.display.toUpperCase(); 
             if (nameA < nameB) {
@@ -126,7 +131,7 @@ $.fn.customNamespace = function (callbackName, params) {
             return 0;
         });
         break;
-        } // end switch sortType
+      } // end switch sortType
      } // end sortType === "values"
     } // end typeof sortOn
     
@@ -137,7 +142,6 @@ $.fn.customNamespace = function (callbackName, params) {
     });
     // bind html to $(this) of jquery function call 
     jquery.html(listHtml.join(""));
-
     return { msg : "OK" };
   };
   // @params[0] = string error message 
@@ -146,14 +150,13 @@ $.fn.customNamespace = function (callbackName, params) {
       if (params.length  != 2) {
         return { msg : "invalid params", numParams: 1};
       }
-
+      // set params
       var errorMsg = params[0];
       var jquery = params[1];
-
+      // add error classes and message
       jquery.find('.error-message').remove();
       jquery.after("<div class=\"error-message text-danger\">" + errorMsg + "</div>");
       jquery.addClass("input-error");
-
       return { msg : "OK" };
   };
   
@@ -168,9 +171,15 @@ $.fn.customNamespace = function (callbackName, params) {
   return;
 };
 
-// example 
+// example use of setListOptions; 
 $("#testList").customNamespace("setListOptions", [
   [ { display: "B word test", value: 2 },
     { display: "Test 1", value: 1.75 }, 
     { display: "Another Test 2", value: 1.50}
   ], "display", "string"]);
+// example use of addError
+$("#testList").customNamespace("addError", [ "Please select an option." ]); 
+// example error logging for invalid parameters
+$("#testList").customNamespace("addError");
+$("#testList").customNamespace("unknownCallback");
+$(".invalidSelector").customNamespace("addError", ["Please select an option."]);
