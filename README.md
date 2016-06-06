@@ -15,7 +15,6 @@ Add callback functions like so:
    // example jquery html function call on $(this)
    jquery.html("<div>" + yourParam + "</div>")
    return { msg : "OK" };
-    }
    }
 ```
 
