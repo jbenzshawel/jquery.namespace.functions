@@ -1,8 +1,5 @@
 "use strict";
 
-// create dom element
-$("body").append("<select id=\"testList\"></select>");
-
 $.fn.customNamespace = function (callbackName, params) {
   // logger object to handle errors 
   var logger = {};
@@ -180,7 +177,10 @@ $.fn.customNamespace = function (callbackName, params) {
 }; // end $.fn.customNamespace 
 
 $(function() {
-	// example use of setListOptions 
+  // create dom element
+  $("body").append("<select id=\"testList\"></select>");
+
+  // example use of setListOptions 
   $("#testList").customNamespace("setListOptions", [
     [ { display: "B word test", value: 2 },
       { display: "Test 1", value: 1.75 }, 
