@@ -1,6 +1,6 @@
 "use strict";
 
-$.fn.wrm = function (callbackName, params) {
+$.fn.customNamespace = function (callbackName, params) {
   // logger object to handle errors 
   var logger = {};
   logger.missingCallback = function() {
@@ -24,7 +24,6 @@ $.fn.wrm = function (callbackName, params) {
     logger.missingCallback(); 
     return; 
   }
-
   if (params === undefined)
     params = [];
  
@@ -169,7 +168,8 @@ $.fn.wrm = function (callbackName, params) {
   return;
 };
 
-$("#testList").wrm("setListOptions", [
+// example 
+$("#testList").customNamespace("setListOptions", [
   [ { display: "B word test", value: 2 },
     { display: "Test 1", value: 1.75 }, 
     { display: "Another Test 2", value: 1.50}
