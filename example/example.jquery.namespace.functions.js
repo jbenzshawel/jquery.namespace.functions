@@ -9,7 +9,7 @@ $.fn.customNamespace = function (callbackName, params) {
     return; 
   };
   logger.callbackNotFound = function(callbackName) {
-    console.log("%cError: callback function " + callbackName + " not found in $()." + NAMESPACE + "( callbackName)", "color:red");
+    console.log("%cError: callback function " + callbackName + " not found in $()." + NAMESPACE + "(callbackName)", "color:red");
     return;
   };
   logger.invalidParams = function(callbackName, numParams) {
@@ -141,14 +141,14 @@ $.fn.customNamespace = function (callbackName, params) {
       } // end switch sortType
      } // end sortType === "values"
     } // end typeof sortOn
-    
     // build out html for select list input   
     var listHtml = [];
     $(arrayList).each(function(i, listItem) {
       listHtml.push("<option value=\""+ listItem.value + "\">" + listItem.display + "</option>");
     });
     // bind html to $(this) of jquery function call 
-    jquery.html(listHtml.join(""));
+    jquery.append("<option value=\"-1\">Any</option>");        
+    jquery.append(listHtml.join(""));
     return { msg : "OK" };
   };
   // @params[0] = string error message 
@@ -181,6 +181,8 @@ $.fn.customNamespace = function (callbackName, params) {
 $(function() {
   // create dom element
   $("body").append("<select id=\"testList\"></select>");
+  $("body").append("<select id=\"testList2\"></select>");
+  
 
   // example use of setListOptions 
   $("#testList").customNamespace("setListOptions", [
@@ -190,7 +192,7 @@ $(function() {
     ]
   ]);
   // example overload of setListOptions
-  $("#testList").customNamespace("setListOptions", [
+  $("#testList2").customNamespace("setListOptions", [
     [ { display: "B word test", value: 2 },
       { display: "Test 1", value: 1.75 }, 
       { display: "Another Test 2", value: 1.50}
