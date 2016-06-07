@@ -172,7 +172,7 @@ $.fn.customNamespace = function (callbackName, params) {
   // call callback function and log errors 
   if (callbacks.hasOwnProperty(callbackName)) {
     var status = callbacks[callbackName](params);
-    if (status.msg === "invalid params") 
+    if (typeof (status) === "object" && status.msg === "invalid params") 
       logger.invalidParams(callbackName, status.numParams);
   } else { 
       logger.callbackNotFound(callbackName);
