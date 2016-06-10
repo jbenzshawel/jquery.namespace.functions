@@ -63,7 +63,7 @@ $.fn.yourNamespace = function (callbackName, params) {
   var callbacks = {};
   // if constructor used merge with callbacks object 
   if (typeof(window[NAMESPACE].callbacks) === "object") {
-    callbacks = $.extend({}, window.yourNamespace.callbacks)
+    callbacks = $.extend({}, window[NAMESPACE].callbacks)
   } 
   /////////////////////////////////////////////////////////
   // ADD CALLBACK FUNCTIONS HERE 
