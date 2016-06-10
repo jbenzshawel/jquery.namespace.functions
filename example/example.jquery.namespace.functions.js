@@ -1,7 +1,8 @@
 "use strict";
 
+const NAMESPACE = "customNamespace";
+
 $.customNamespace = function(callbacksConstructor) {
-   const NAMESPACE = "customNamespace";
   if (typeof(window[NAMESPACE]) === "undefined") {
     window[NAMESPACE] = {};
   }
@@ -16,7 +17,6 @@ $.customNamespace = function(callbacksConstructor) {
 }
 
 $.fn.customNamespace = function (callbackName, params) {
-  const NAMESPACE = "customNamespace"; 
   // logger object to handle errors 
   var logger = {};
   logger.missingCallback = function() {
