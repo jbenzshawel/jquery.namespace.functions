@@ -1,7 +1,7 @@
 # jquery.namespace.functions
 jQuery functions / plugin namespace  
 
-Allows calling custom jquery functions (`$.fn.yourFunction`) without interferring with base jquery namespace. Define your namespace by renaming `$.fn.yourNamespace` and setting `const NAMESPACE` in `jquery.namespace.functions.js`. See [example](https://github.com/jbenzshawel/jquery.namespace.functions/blob/master/example/example.jquery.namespace.functions.js) for more examples;
+Allows calling custom jquery functions (`$.fn.yourFunction`) without interferring with base jquery namespace. Define your namespace by renaming `$.fn.yourNamespace` and setting `const NAMESPACE` in `jquery.namespace.functions.js`. See [example](https://github.com/jbenzshawel/jquery.namespace.functions/blob/master/example/example.jquery.namespace.functions.js) for more examples.
 
 Define callback functions like so:
 ```javascript
