@@ -62,7 +62,7 @@ $.fn.customNamespace = function (callbackName, params) {
   // callbacks object for callback functions
   var callbacks = {};
   // if constructor used merge with callbacks object 
-  if (typeof(window.customNamespace.callbacks) === "object") {
+  if (typeof(window[NAMESPACE].callbacks) === "object") {
     callbacks = $.extend({}, window.customNamespace.callbacks)
   } 
   // @params[0] = array of objects { display : "" : value: ""} for Select List 
