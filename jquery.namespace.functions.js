@@ -8,7 +8,6 @@ $.yourNamespace = function(callbacksConstructor) {
   window.yourNamespace.callbacks = callbacksConstructor;
 }
 
-
 $.fn.yourNamespace = function (callbackName, params) {
   const NAMESPACE = "yourNamespace"; 
   // logger object to handle errors 

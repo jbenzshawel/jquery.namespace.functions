@@ -1,4 +1,5 @@
 "use strict";
+
 $.customNamespace = function(callbacksConstructor) {
   if (typeof(window.customNamespace) === "undefined") {
     window.customNamespace = {};
@@ -163,7 +164,6 @@ $.fn.customNamespace = function (callbackName, params) {
     jquery.append(listHtml.join(""));
     return { msg : "OK" };
   };
-  
   
   // call callback function and log errors 
   if (callbacks.hasOwnProperty(callbackName)) {
