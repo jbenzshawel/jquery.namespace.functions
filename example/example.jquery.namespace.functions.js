@@ -1,4 +1,10 @@
 "use strict";
+$.customNamespace = function(callbacksConstructor) {
+  if (typeof(window.customNamespace) === "undefined") {
+    window.customNamespace = {};
+  }
+  window.customNamespace.callbacks = callbacksConstructor;
+}
 
 $.fn.customNamespace = function (callbackName, params) {
   const NAMESPACE = "customNamespace"; 
@@ -46,6 +52,10 @@ $.fn.customNamespace = function (callbackName, params) {
   params.push($(this));
   // callbacks object for callback functions
   var callbacks = {};
+  // if constructor used merge with callbacks object 
+  if (typeof(window.customNamespace.callbacks) === "object") {
+    callbacks = $.extend({}, window.customNamespace.callbacks)
+  } 
   // @params[0] = array of objects { display : "" : value: ""} for Select List 
   // @params[1] = string of "display" or "value" to sort on (optional)
   // @params[2] = string type to sort on (string for display. string, float, or 
@@ -153,21 +163,7 @@ $.fn.customNamespace = function (callbackName, params) {
     jquery.append(listHtml.join(""));
     return { msg : "OK" };
   };
-  // @params[0] = string error message 
-  // @return status object of DOM manipulation 
-  callbacks.addError = function(params) {
-      if (params.length  != 2) {
-        return { msg : "invalid params", numParams: 1};
-      }
-      // set params
-      var errorMsg = params[0];
-      var jquery = params[1];
-      // add error classes and message
-      jquery.find('.error-message').remove();
-      jquery.after("<div class=\"error-message text-danger\">" + errorMsg + "</div>");
-      jquery.addClass("input-error");
-      return { msg : "OK" };
-  };
+  
   
   // call callback function and log errors 
   if (callbacks.hasOwnProperty(callbackName)) {
@@ -181,6 +177,24 @@ $.fn.customNamespace = function (callbackName, params) {
 }; // end $.fn.customNamespace 
 
 $(function() {
+  var additionalCallbacks = {};
+  // @params[0] = string error message 
+  // @return status object of DOM manipulation 
+  additionalCallbacks.addError = function(params) {
+      if (params.length  != 2) {
+        return { msg : "invalid params", numParams: 1};
+      }
+      // set params
+      var errorMsg = params[0];
+      var jquery = params[1];
+      // add error classes and message
+      jquery.find('.error-message').remove();
+      jquery.after("<div class=\"error-message text-danger\">" + errorMsg + "</div>");
+      jquery.addClass("input-error");
+      return { msg : "OK" };
+  };
+  // initalize namespace with constructor (additional way to add callbacks)
+  $.customNamespace(additionalCallbacks);
   // create dom elements for examples
   $("body").append("<select id=\"testList\"></select>");
   $("body").append("<select id=\"testList2\"></select>");
