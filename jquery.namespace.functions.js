@@ -2,10 +2,18 @@
 
 // optional constructor to pass callback functions to namespace
 $.yourNamespace = function(callbacksConstructor) {
-  if (typeof(window.yourNamespace) === "undefined") {
-    window.yourNamespace = {};
+  const NAMESPACE = "yourNamespace";
+  if (typeof(window[NAMESPACE]) === "undefined") {
+    window[NAMESPACE] = {};
   }
-  window.yourNamespace.callbacks = callbacksConstructor;
+  if (typeof(window[NAMESPACE].callbacks) === "undefined") {
+    window[NAMESPACE].callbacks = callbacksConstructor;        
+  } else if (typeof(window[NAMESPACE].callbacks) === "object") {
+    window[NAMESPACE].callbackName = $.extend(window[NAMESPACE].callbackName, 
+                                          callbacksConstructor);
+  } else {
+    window[NAMESPACE].callbackName = callbacksConstructor;
+  }
 }
 
 $.fn.yourNamespace = function (callbackName, params) {

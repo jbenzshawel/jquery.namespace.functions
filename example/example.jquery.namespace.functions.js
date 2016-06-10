@@ -1,10 +1,18 @@
 "use strict";
 
 $.customNamespace = function(callbacksConstructor) {
-  if (typeof(window.customNamespace) === "undefined") {
-    window.customNamespace = {};
+   const NAMESPACE = "customNamespace";
+  if (typeof(window[NAMESPACE]) === "undefined") {
+    window[NAMESPACE] = {};
   }
-  window.customNamespace.callbacks = callbacksConstructor;
+  if (typeof(window[NAMESPACE].callbacks) === "undefined") {
+    window[NAMESPACE].callbacks = callbacksConstructor;        
+  } else if (typeof(window[NAMESPACE].callbacks) === "object") {
+    window[NAMESPACE].callbackName = $.extend(window[NAMESPACE].callbackName, 
+                                          callbacksConstructor);
+  } else {
+    window[NAMESPACE].callbackName = callbacksConstructor;
+  }
 }
 
 $.fn.customNamespace = function (callbackName, params) {
